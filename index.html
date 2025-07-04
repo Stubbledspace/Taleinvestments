@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High-Quality Wooden Kitchenware</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f5f2;
+            color: #333;
+        }
+
+        header {
+            background-color: #6b4f3b;
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: #4b3728;
+            color: white;
+            border: none;
+            font-size: 1.2rem;
+            padding: 0.5rem 1rem;
+            width: 100%;
+            text-align: left;
+        }
+
+        nav {
+            background-color: #4b3728;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 0.75rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0.5rem 1rem;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .intro {
+            position: relative;
+            padding: 6rem 1rem;
+            text-align: center;
+            font-size: 2rem;
+            color: white;
+            background: url('https://plus.unsplash.com/premium_photo-1661610656490-ba1749a27a0a?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDM3fHx8ZW58MHx8fHx8') no-repeat center center/cover;
+        }
+
+        .intro::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
+            z-index: 0;
+        }
+
+        .intro p {
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1.2s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.9s ease-out forwards;
+            opacity: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .product {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            padding-bottom: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .product:hover {
+            transform: scale(1.02);
+        }
+
+        .product img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .price {
+            margin-top: 0.5rem;
+            font-weight: bold;
+            color: #6b4f3b;
+        }
+
+        .detail-page {
+            display: none;
+            padding: 2rem 0;
+            background-color: white;
+            animation: fadeInUp 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        .detail-page.active {
+            display: block;
+        }
+
+        .detail-page img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background-color: #6b4f3b;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.9rem;
+        }
+
+        @media screen and (max-width: 768px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+            .intro {
+                font-size: 1rem;
+                padding: 2rem 1rem;
+            }
+            .nav-toggle {
+                display: block;
+            }
+            nav {
+                display: none;
+                flex-direction: column;
+                align-items: center;
+            }
+            nav.show {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Tale Investments</h1>
+    </header>
+    <button class="nav-toggle" onclick="toggleNav()">☰ Menu</button>
+    <nav id="navbar">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <section class="intro">
+        <p>We offer the best high-quality wooden kitchen utensils and dishes, handcrafted to elevate your culinary space.</p>
+    </section>
+
+    <div class="container">
+            <section class="products" id="product-list">
+            <div class="product" onclick="showDetail('2.jpg', 'Wooden Bowl', 'R199.00')">
+    <img src="Images\20.jpg" alt="Wooden Bowl">
+    <div class="price">R199.00</div>
+</div>
+<div class="product" onclick="showDetail('12.jpg', 'Double Section Wooden Bowl', 'R249.00')">
+    <img src="Images\18.jpg" alt="Double Section Wooden Bowl">
+    <div class="price">R249.00</div>
+</div>
+<div class="product" onclick="showDetail('13.jpg', 'Long Wooden Tray', 'R229.00')">
+    <img src="Images\17.jpg" alt="Long Wooden Tray">
+    <div class="price">R229.00</div>
+</div>
+<div class="product" onclick="showDetail('placeholder1.jpg', 'Product Name', 'R0.00')">
+    <img src="Images\16.jpg" alt="Placeholder Product">
+    <div class="price">R0.00</div>
+</div>
+<div class="product" onclick="showDetail('placeholder2.jpg', 'Product Name', 'R0.00')">
+    <img src="Images\3.jpg" alt="Placeholder Product">
+    <div class="price">R0.00</div>
+</div>
+<div class="product" onclick="showDetail('placeholder3.jpg', 'Product Name', 'R0.00')">
+    <img src="Images\9.jpg" alt="Placeholder Product">
+    <div class="price">R0.00</div>
+</div>
+<div class="product" onclick="showDetail('placeholder4.jpg', 'Product Name', 'R0.00')">
+    <img src="Images\10.jpg" alt="Placeholder Product">
+    <div class="price">R0.00</div>
+</div>
+<div class="product" onclick="showDetail('placeholder5.jpg', 'Product Name', 'R0.00')">
+    <img src="Images\11.jpg" alt="Placeholder Product">
+    <div class="price">R0.00</div>
+</div>
+<div class="product" onclick="showDetail('placeholder6.jpg', 'Product Name', 'R0.00')">
+    <img src="Images\12.jpg" alt="Placeholder Product">
+    <div class="price">R0.00</div>
+</div>
+<div class="product" onclick="showDetail('placeholder7.jpg', 'Product Name', 'R0.00')">
+    <img src="Images\13.jpg" alt="Placeholder Product">
+    <div class="price">R0.00</div>
+</div>
+
+        </section>
+
+        <section class="detail-page" id="product-detail">
+            <button onclick="goBack()" style="margin-bottom: 1rem; padding: 0.5rem 1rem; background-color: #6b4f3b; color: white; border: none; cursor: pointer;">&larr; Back</button>
+            <h2 id="detail-title"></h2>
+            <img id="detail-image" src="" alt="">
+            <p id="detail-price" style="font-size: 1.2rem; color: #6b4f3b; font-weight: bold;"></p>
+            <p style="margin-top: 1rem;">This beautifully crafted item is part of our high-quality wooden kitchenware collection. Perfect for any home chef or as a thoughtful gift.</p>
+        </section>
+    </div>
+
+    <footer>
+        &copy; 2025 Tale Investments. All rights reserved.
+    </footer>
+
+    <script>
+        function toggleNav() {
+            document.getElementById("navbar").classList.toggle("show");
+        }
+
+        function showDetail(img, title, price) {
+            document.getElementById('product-list').style.display = 'none';
+            const detail = document.getElementById('product-detail');
+            detail.classList.add('active');
+            detail.style.opacity = 0;
+            setTimeout(() => { detail.style.opacity = 1; }, 50);
+
+            document.getElementById('detail-image').src = img;
+            document.getElementById('detail-title').textContent = title;
+            document.getElementById('detail-price').textContent = price;
+        }
+
+        function goBack() {
+            document.getElementById('product-list').style.display = 'grid';
+            document.getElementById('product-detail').classList.remove('active');
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.product').forEach((el, i) => {
+                el.classList.add('fade-in-up');
+                el.style.animationDelay = `${i * 0.1}s`;
+            });
+        });
+    </script>
+</body>
+</html>
