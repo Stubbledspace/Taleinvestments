@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>High-Quality Wooden Kitchenware</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -12,35 +14,94 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        html {
+            overflow-x: hidden;
+        }
+
         body {
             background-color: #f8f5f2;
             color: #333;
+            overflow-x: hidden;
         }
 
-        header {
-            background-color: #6b4f3b;
+        .site-header {
+            background-color: #4b3728;
             color: white;
-            padding: 2rem 1rem;
             text-align: center;
+            padding: 2rem 1rem;
+            position: relative;
+            margin: 0;
+            padding: 0;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            border: 1px solid white;
+            display: inline-block;
+            padding: 1rem 2rem;
+            margin: 1rem auto;
         }
 
         .nav-toggle {
             display: none;
-            background: #4b3728;
-            color: white;
+            cursor: pointer;
+            background: none;
             border: none;
-            font-size: 1.2rem;
-            padding: 0.5rem 1rem;
-            width: 100%;
-            text-align: left;
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            z-index: 1001;
+        }
+
+        .nav-toggle span,
+        .nav-toggle span::before,
+        .nav-toggle span::after {
+            display: block;
+            background: white;
+            height: 3px;
+            width: 25px;
+            position: relative;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .nav-toggle span::before,
+        .nav-toggle span::after {
+            content: '';
+            position: absolute;
+            left: 0;
+        }
+
+        .nav-toggle span::before {
+            top: -8px;
+        }
+
+        .nav-toggle span::after {
+            top: 8px;
+        }
+
+        .nav-toggle.open span {
+            background: transparent;
+        }
+
+        .nav-toggle.open span::before {
+            top: 0;
+            transform: rotate(45deg);
+        }
+
+        .nav-toggle.open span::after {
+            top: 0;
+            transform: rotate(-45deg);
         }
 
         nav {
             background-color: #4b3728;
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
-            padding: 0.75rem;
+            padding: 0.5rem 0;
+            position: relative;
+            z-index: 999;
+            border-top: 1px solid white;
         }
 
         nav a {
@@ -56,7 +117,7 @@
 
         .intro {
             position: relative;
-            padding: 6rem 1rem;
+            padding: 10rem 1rem;
             text-align: center;
             font-size: 2rem;
             color: white;
@@ -137,6 +198,12 @@
             color: #6b4f3b;
         }
 
+        .product-details {
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: 0.3rem;
+        }
+
         .detail-page {
             display: none;
             padding: 2rem 0;
@@ -163,107 +230,320 @@
             font-size: 0.9rem;
         }
 
-        @media screen and (max-width: 768px) {
-            header h1 {
-                font-size: 1.5rem;
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            height: 55vh;
+            overflow: hidden;
+            margin-bottom: 0;
+            aspect-ratio: 16 / 9;
+        }
+
+        .slides-wrapper {
+            display: flex;
+            width: 300%; /* 3 slides */
+            height: 100%;
+            transition: transform 1s ease-in-out;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+        }
+
+        .slide img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .slide.active {
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .slide:nth-child(1) { animation-delay: 0s; }
+        .slide:nth-child(2) { animation-delay: 4s; }
+        .slide:nth-child(3) { animation-delay: 8s; }
+
+        @keyframes fadeSlide {
+            0% { opacity: 1; }
+            33.33% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        .intro-text-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem 3rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+            z-index: 2;
+        }
+
+        .intro-text-box h1 {
+            font-size: 2rem;
+            color: #4b3728;
+            margin: 0;
+        }
+
+        @media screen and (min-width: 769px) {
+            .mobile-intro {
+                display: none;
             }
+        }
+
+        @media screen and (max-width: 768px) {
+
+            .site-header {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                padding: 1.5rem 1rem 1rem;
+            }
+
+            .intro-text-box {
+                display: none;
+            }
+
+            .mobile-intro {
+                display: block;
+                background: rgba(255, 255, 255, 0.95);
+                padding: 1.5rem 1.2rem;
+                border-radius: 12px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                width: calc(100% - 2rem);
+                max-width: 600px;
+                box-sizing: border-box;
+                z-index: 10;
+                position: relative;
+                margin: -2rem auto 1rem;
+            }
+
+            .mobile-intro h1 {
+                font-size: 1.4rem;
+                color: #4b3728;
+                line-height: 1.5;
+            }
+            .intro-text-box h1 {
+                font-size: 1.5rem;
+                padding: 0.5rem;
+            }
+
+            header {
+                padding: 1.5rem 1rem 1rem;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
             .intro {
                 font-size: 1rem;
-                padding: 2rem 1rem;
+                padding: 5rem 1rem 6rem;
             }
-            .nav-toggle {
-                display: block;
-            }
-            nav {
-                display: none;
+
+            .slideshow-container {
+                height: auto !important;
+                min-height: 45vh; /* Adjust if needed */
+                display: flex;
                 flex-direction: column;
                 align-items: center;
+                justify-content: flex-end;
+                padding-bottom: 1rem;
             }
+
+            .nav-toggle {
+                display: block;
+                top: 0.75rem;
+                position: absolute;
+                left: 1rem;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            nav {
+                flex-direction: column;
+                align-items: center;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                transform: translateY(-100%);
+                transition: transform 0.4s ease;
+            }
+
             nav.show {
-                display: flex;
+                transform: translateY(55px);
+            }
+
+            nav a {
+                padding: 1rem;
+                margin: 0;
+                width: 100%;
+                text-align: center;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .slideshow-container {
+                margin: 0 !important;
+                padding: 0 !important;
+                border: none !important;
+            }
+
+            .slides-wrapper {
+                margin: 0 !important;
+                padding: 0 !important;
+                border: none !important;
+                height: 35vh;
+            }
+            .slide {
+                margin: 0 !important;
+                padding: 0 !important;
+                border: none !important;
+            }
+
+            .mobile-intro {
+                margin-top: -2rem !important;
+            }
+        }
+
+        .promo-banner {
+            background-color: #fff2e6;
+            color: #4b3728;
+            text-align: center;
+            padding: 1rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-top: 2px solid #e0c7b1;
+            border-bottom: 2px solid #e0c7b1;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
             }
         }
     </style>
-</head>
-<body>
-    <header>
-        <h1>Tale Investments</h1>
-    </header>
-    <button class="nav-toggle" onclick="toggleNav()">☰ Menu</button>
-    <nav id="navbar">
-        <a href="index.html">Home</a>
-        <a href="about.html">About Us</a>
-        <a href="contact.html">Contact</a>
-    </nav>
-
-    <section class="intro">
-        <p>We offer the best high-quality wooden kitchen utensils and dishes, handcrafted to elevate your culinary space.</p>
-    </section>
-
-    <div class="container">
-            <section class="products" id="product-list">
-            <div class="product" onclick="showDetail('2.jpg', 'Wooden Bowl', 'R199.00')">
-    <img src="Images\20.jpg" alt="Wooden Bowl">
-    <div class="price">R199.00</div>
-</div>
-<div class="product" onclick="showDetail('12.jpg', 'Double Section Wooden Bowl', 'R249.00')">
-    <img src="Images\18.jpg" alt="Double Section Wooden Bowl">
-    <div class="price">R249.00</div>
-</div>
-<div class="product" onclick="showDetail('13.jpg', 'Long Wooden Tray', 'R229.00')">
-    <img src="Images\17.jpg" alt="Long Wooden Tray">
-    <div class="price">R229.00</div>
-</div>
-<div class="product" onclick="showDetail('placeholder1.jpg', 'Product Name', 'R0.00')">
-    <img src="Images\16.jpg" alt="Placeholder Product">
-    <div class="price">R0.00</div>
-</div>
-<div class="product" onclick="showDetail('placeholder2.jpg', 'Product Name', 'R0.00')">
-    <img src="Images\3.jpg" alt="Placeholder Product">
-    <div class="price">R0.00</div>
-</div>
-<div class="product" onclick="showDetail('placeholder3.jpg', 'Product Name', 'R0.00')">
-    <img src="Images\9.jpg" alt="Placeholder Product">
-    <div class="price">R0.00</div>
-</div>
-<div class="product" onclick="showDetail('placeholder4.jpg', 'Product Name', 'R0.00')">
-    <img src="Images\10.jpg" alt="Placeholder Product">
-    <div class="price">R0.00</div>
-</div>
-<div class="product" onclick="showDetail('placeholder5.jpg', 'Product Name', 'R0.00')">
-    <img src="Images\11.jpg" alt="Placeholder Product">
-    <div class="price">R0.00</div>
-</div>
-<div class="product" onclick="showDetail('placeholder6.jpg', 'Product Name', 'R0.00')">
-    <img src="Images\12.jpg" alt="Placeholder Product">
-    <div class="price">R0.00</div>
-</div>
-<div class="product" onclick="showDetail('placeholder7.jpg', 'Product Name', 'R0.00')">
-    <img src="Images\13.jpg" alt="Placeholder Product">
-    <div class="price">R0.00</div>
-</div>
-
+    </head>
+    <body>
+        <header class="site-header">
+            <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle navigation">
+            <span></span>
+            </button>
+            <h1>Tale Investments</h1>
+        </header>
+        <nav id="navbar">
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <header class="slideshow-container">
+            <div class="slides-wrapper">
+                <div class="slide"><img src="Images/10.jpg" alt="Slide 1" /></div>
+                <div class="slide"><img src="Images/11.jpg" alt="Slide 2" /></div>
+                <div class="slide"><img src="Images/12.jpg" alt="Slide 3" /></div>
+            </div>
+            <div class="intro-text-box">
+                <h1>We offer the best high-quality wooden kitchen utensils and dishes, handcrafted to elevate your culinary space.</h1>
+            </div>
+            <div class="mobile-intro">
+                <h1>We offer the best high-quality wooden kitchen utensils and dishes, handcrafted to elevate your culinary space.</h1>
+            </div>
+        </header>
+        <section class="promo-banner">
+            <p>🎉 Special Offer: Buy any <strong>2 products</strong> for only <strong>R600</strong>!</p>
         </section>
+        <div class="container">
+            <section class="products" id="product-list">
+            <div class="product" onclick="showDetail('Images/1.jpg', 'Wooden Bowl', 'R350.00')">
+                <img src="Images/1.jpg" alt="Wooden Bowl">
+                <div class="price">R350.00</div>
+                <div class="product-details">Size: Medium | Qty: 1 | Type: Bowl | Material: Acacia Wood</div>
+            </div>
 
-        <section class="detail-page" id="product-detail">
+            <div class="product" onclick="showDetail('Images/2.jpg', 'Wooden Bowl', 'R350.00')">
+                <img src="Images/2.jpg" alt="Wooden Bowl">
+                <div class="price">R350.00</div>
+                <div class="product-details">Size: Medium | Qty: 1 | Type: Bowl | Material: Acacia Wood</div>
+            </div>
+
+            <div class="product" onclick="showDetail('Images/3.jpg', 'Wooden Bowl', 'R350.00')">
+                <img src="Images/3.jpg" alt="Wooden Bowl">
+                <div class="price">R350.00</div>
+                <div class="product-details">Size: Medium | Qty: 1 | Type: Bowl | Material: Acacia Wood</div>
+            </div>
+
+            <div class="product" onclick="showDetail('Images/4.jpg', 'Wooden Bowl', 'R350.00')">
+                <img src="Images/4.jpg" alt="Wooden Bowl">
+                <div class="price">R350.00</div>
+                <div class="product-details">Size: Medium | Qty: 1 | Type: Bowl | Material: Acacia Wood</div>
+            </div>
+
+            <div class="product" onclick="showDetail('Images/5..jpg', 'Wooden Bowl', 'R350.00')">
+                <img src="Images/5.jpg" alt="Wooden Bowl">
+                <div class="price">R350.00</div>
+                <div class="product-details">Size: Medium | Qty: 1 | Type: Bowl | Material: Acacia Wood</div>
+            </div>
+
+            <div class="product" onclick="showDetail('Images/6.jpg', 'Wooden Bowl', 'R350.00')">
+                <img src="Images/6.jpg" alt="Wooden Bowl">
+                <div class="price">R350.00</div>
+                <div class="product-details">Size: Medium | Qty: 1 | Type: Bowl | Material: Acacia Wood</div>
+            </div>
+
+            <div class="product" onclick="showDetail('Images/7.jpg', 'Wooden Bowl', 'R350.00')">
+                <img src="Images/7.jpg" alt="Wooden Bowl">
+                <div class="price">R350.00</div>
+                <div class="product-details">Size: Medium | Qty: 1 | Type: Bowl | Material: Acacia Wood</div>
+            </div>
+
+            <div class="product" onclick="showDetail('Images/8.jpg', 'Wooden Bowl', 'R350.00')">
+                <img src="Images/8.jpg" alt="Wooden Bowl">
+                <div class="price">R350.00</div>
+                <div class="product-details">Size: Medium | Qty: 1 | Type: Bowl | Material: Acacia Wood</div>
+            </div>
+            </section>
+
+            <section class="detail-page" id="product-detail">
             <button onclick="goBack()" style="margin-bottom: 1rem; padding: 0.5rem 1rem; background-color: #6b4f3b; color: white; border: none; cursor: pointer;">&larr; Back</button>
             <h2 id="detail-title"></h2>
             <img id="detail-image" src="" alt="">
             <p id="detail-price" style="font-size: 1.2rem; color: #6b4f3b; font-weight: bold;"></p>
             <p style="margin-top: 1rem;">This beautifully crafted item is part of our high-quality wooden kitchenware collection. Perfect for any home chef or as a thoughtful gift.</p>
-        </section>
-    </div>
+            </section>
+        </div>
 
-    <footer>
-        &copy; 2025 Tale Investments. All rights reserved.
-    </footer>
+        <footer>
+            &copy; 2025 Tale Investments. All rights reserved.
+        </footer>
 
-    <script>
-        function toggleNav() {
-            document.getElementById("navbar").classList.toggle("show");
-        }
+        <script>
+            function toggleNav() {
+            const navbar = document.getElementById("navbar");
+            const toggle = document.querySelector(".nav-toggle");
 
-        function showDetail(img, title, price) {
+            navbar.classList.toggle("show");
+            toggle.classList.toggle("open");
+            }
+
+            function showDetail(img, title, price) {
             document.getElementById('product-list').style.display = 'none';
             const detail = document.getElementById('product-detail');
             detail.classList.add('active');
@@ -273,19 +553,35 @@
             document.getElementById('detail-image').src = img;
             document.getElementById('detail-title').textContent = title;
             document.getElementById('detail-price').textContent = price;
-        }
+            }
 
-        function goBack() {
+            function goBack() {
             document.getElementById('product-list').style.display = 'grid';
             document.getElementById('product-detail').classList.remove('active');
-        }
+            }
 
-        window.addEventListener('DOMContentLoaded', () => {
+            window.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.product').forEach((el, i) => {
                 el.classList.add('fade-in-up');
                 el.style.animationDelay = `${i * 0.1}s`;
             });
-        });
-    </script>
-</body>
+            });
+
+            let currentIndex = 0;
+            const slidesWrapper = document.querySelector('.slides-wrapper');
+            const totalSlides = document.querySelectorAll('.slide').length;
+
+            function slideTo(index) {
+                slidesWrapper.style.transform = `translateX(-${index * 100}%)`;
+            }
+
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % totalSlides;
+                slideTo(currentIndex);
+            }
+
+            setInterval(nextSlide, 4000);
+        </script>
+
+    </body>
 </html>
