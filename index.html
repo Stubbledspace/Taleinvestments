@@ -240,8 +240,8 @@
 
         .slideshow-container {
             position: relative;
-            width: 100%;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            width: 100vw;
+            height: 65vh;
             overflow: hidden;
             background-color: #000;
         }
@@ -251,9 +251,8 @@
             top: 0;
             left: 0;
             display: flex;
-            width: 300%; /* 3 slides */
+            width: 100%;
             height: 100%;
-            transition: transform 1s ease-in-out;
         }
 
         .slide {
@@ -263,24 +262,9 @@
         }
 
         .slide img {
-            width: auto;
-            height: 100%;
+            width: 100%;
+            height: auto;
             object-fit: cover;
-        }
-
-        .slide.active {
-            opacity: 1;
-            z-index: 1;
-        }
-
-        .slide:nth-child(1) { animation-delay: 0s; }
-        .slide:nth-child(2) { animation-delay: 4s; }
-        .slide:nth-child(3) { animation-delay: 8s; }
-
-        @keyframes fadeSlide {
-            0% { opacity: 1; }
-            33.33% { opacity: 0; }
-            100% { opacity: 0; }
         }
 
         @keyframes fadeTextIn {
@@ -383,7 +367,7 @@
 
             .slideshow-container {
                 height: auto !important;
-                min-height: 45vh; /* Adjust if needed */
+                min-height: 30vh;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -617,22 +601,21 @@
             });
             });
 
-            let currentIndex = 0;
-            const slides = document.querySelectorAll(".slide");
-            const totalSlides = slides.length;
-            const wrapper = document.querySelector(".slides-wrapper");
+            let slideIndex = 0;
 
-            function showSlide(index) {
-                const offset = -index * 100;
-                wrapper.style.transform = `translateX(${offset}%)`;
+            function showSlides() {
+                const slides = document.querySelectorAll('.slide');
+                slides.forEach(slide => slide.style.display = 'none');
+
+                slideIndex++;
+                if (slideIndex > slides.length) { slideIndex = 1; }
+
+                slides[slideIndex - 1].style.display = 'block';
             }
 
-            function nextSlide() {
-                currentIndex = (currentIndex + 1) % totalSlides;
-                showSlide(currentIndex);
-            }
-
-            setInterval(nextSlide, 4000);
+            // Initial call + repeat every 4s
+            showSlides();
+            setInterval(showSlides, 4000);
         </script>
 
     </body>
